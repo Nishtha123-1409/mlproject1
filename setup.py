@@ -1,0 +1,31 @@
+from setuptools import find_packages,setup
+from typing import List
+
+Hyphen_e_dot='-e . '
+def get_requirements(file_path:str)->List[str]:
+    '''
+    Docstring for get_requirements
+    
+    :param file_path: Description
+    :type file_path: str
+    :return: Description
+    :rtype: List[str]
+    '''
+    requirements=[]
+    with open(file_path) as file_obj:
+        requirements=file_obj.readlines()
+        [req.replace("\n","")for req in requirements]
+
+        if Hyphen_e_dot in requirements:
+            requirements.remove(Hyphen_e_dot)
+
+    return requirements
+setup(
+    name='mlproject1',
+    version='0.0.1',
+    author='Nishtha',
+    author_email='nishthajain0306@gmail.com',
+    packages= find_packages(),
+    install_requires= get_requirements('requirements.txt')
+
+)
