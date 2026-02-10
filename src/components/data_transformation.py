@@ -42,7 +42,7 @@ class DataTransformation:
                 steps=[
                     ("impute",SimpleImputer(strategy="most_frequent")),
                     ("one_hot_encoder",OneHotEncoder()),
-                    ("scaler",StandardScaler())
+                    ("scaler",StandardScaler(with_mean=False))
                 ]
             )
             logging.info(f"categorical columns: {categorical_columns}")
@@ -70,7 +70,7 @@ class DataTransformation:
 
             preprocessor_obj=self.get_data_transformer_object()
 
-            target_column_name = "math score"
+            target_column_name = "math_score"
             numerical_columns = [ 'reading_score', 'writing_score']
 
             input_feature_train_df= train_df.drop(columns=[target_column_name],axis=1)
@@ -86,7 +86,7 @@ class DataTransformation:
             )
 
             input_feature_train_array = preprocessor_obj.fit_transform(input_feature_train_df)
-            input_feature_test_array = preprocessor_obj.fit_transform(input_feature_test_df)
+            input_feature_test_array = preprocessor_obj.transform(input_feature_test_df)
 
             train_arr = np.c_[
                 input_feature_train_array , np.array(target_feature_train_df)
