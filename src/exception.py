@@ -23,3 +23,10 @@ if __name__=="__main__":
     except Exception as e:
         logging.info('Divide by zero')
         raise CustomException(e,sys)
+
+        '''
+        To standardize error handling across the ML pipeline and include
+        detailed runtime 
+        information like file name and line number for easier debugging and 
+        logging.
+        '''
