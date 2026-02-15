@@ -1,7 +1,8 @@
 from flask import Flask , request , render_template
 import numpy as np
 import pandas as pd
-from src.pipeline.predict_pipeline import CustomData,Predictpipeline 
+from src.pipeline.predict_pipeline import CustomData,Predictpipeline
+import os 
 
 from sklearn.preprocessing import StandardScaler
 application = Flask(__name__)
@@ -33,5 +34,8 @@ def predict_datapoint():
         results=predict_pipeline.predict(pred_df)
         return render_template('home.html',results=results[0])
     
+import os
+
 if __name__=="__main__":
-    app.run(host="0.0.0.0",debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
